@@ -1,14 +1,24 @@
-client.config(function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
-  $sceDelegateProvider.resourceUrlWhitelist([
+//Angular 1 Routes
+// customers.routes.js
+angular
+  .module('client')
+  .run(appRun);
 
-  $stateProvider
-  //// STATE FOR LOGIN
-    .state('home', {
-      url: '/home',
-      templateUrl: "/home.html",
-      controller: 'HomeCtrl as homeCtrl'
-    })
+/* @ngInject */
+function appRun(routerHelper) {
+  routerHelper.configureStates(getStates());
+}
 
-  // DEFAULT STATE
-  $urlRouterProvider.otherwise('/home');
-});
+function getStates() {
+  return [
+    {
+      state: 'home',
+      config: {
+        abstract: true,
+        template: 'home.html',
+        url: '/home',
+        controller: 'HomeCtrl'
+      }
+    }
+  ];
+}

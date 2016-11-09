@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" style="width:100%; height:100%">
 <head>
+    <base href="/">
     <title>Calebs Angular Web App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--CSS-->
@@ -11,9 +12,11 @@
     <script src="/node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
     <!--ANGULAR CONTROLLERS-->
     <script src="client.js"></script>
+    <script src="routerHelperProvider.js"></script>
     <script src="routes.js"></script>
+    <script src="homeCtrl.js"></script>
 </head>
 <body ng-app="client">
-<div ui-view></div>
+<div ui-view="home"></div>
 </body>
 </html>

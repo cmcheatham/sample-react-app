@@ -1,3 +1,4 @@
-var portal = angular.module('client', [
-  'ui.router'
-])
+angular
+  .module('client', [
+    'ui.router'
+  ]);

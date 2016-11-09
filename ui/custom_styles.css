@@ -10,4 +10,6 @@ body{
     margin-right: auto;
     margin-left: auto;
     background-color: grey;
+    font-size: 20pt;
+    color: green;
 }
