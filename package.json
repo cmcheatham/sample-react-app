@@ -1,7 +1,24 @@
 {
-  "name": "application-name",
+  "name": "sample-angular-app",
   "version": "0.0.1",
   "dependencies": {
     "express": "^4.14.0"
-  }
+  },
+  "description": "Nodejs/Express/Angular App",
+  "main": "myApp.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d1gitalassassin/sample-angular-app.git"
+  },
+  "author": "Caleb Cheatham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/d1gitalassassin/sample-angular-app/issues"
+  },
+  "homepage": "https://github.com/d1gitalassassin/sample-angular-app#readme"
 }
+
