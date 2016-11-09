@@ -3,6 +3,9 @@ var app = express();
 var path = require('path');
 var rootViewPath = __dirname + '/ui';
 
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
+app.use(express.static(__dirname + '/ui'));
+
 app.get('/', function (req, res) {
   res.send('Root');
 })
