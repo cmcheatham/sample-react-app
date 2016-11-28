@@ -11,11 +11,11 @@
     <div class="page-header">
         <h1>ReactJS - Event CMS</h1>
     </div>
-    <div id="companyApp"></div>
+    <div id="eventCMSApp"></div>
 </div>
 <script type="text/jsx">
     /** @jsx React.DOM */
-    var CompanyApp = React.createClass({
+    var EventCMSApp = React.createClass({
         getInitialState: function() {
             return {companylist:this.props.companies};
         },
@@ -180,7 +180,7 @@
         {id:1,event_title:'Annual Winter Festival',start_date:"12-18-2016", end_date: "12-20-2016", category: "Public Event", description: "The cities annual winter festival", featured: true, created_at: '11-15-2016 00:00:00', updated_at: '11-15-2016 00:00:00'},
         {id:2,event_title:'Wild Cats Football',start_date:"12-10-2016", end_date: "12-10-2016", category: "Sports Event", description: "Wild Cats vs Panthers", featured: true, created_at: '11-15-2016 00:00:00', updated_at: '11-15-2016 00:00:00'}
     ];
-    React.renderComponent( <CompanyApp companies={defCompanies}/>, document.getElementById( "companyApp" ) );
+    React.renderComponent( <EventCMSApp companies={defCompanies}/>, document.getElementById( "eventCMSApp" ) );
 </script>
 </body>
 </html>
