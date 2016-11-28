@@ -23,7 +23,14 @@ exports.upDateEvents = function (req, res) {
 //GET EVENT LIST
 exports.listEvents = function (req, res) {
 
-    console.log('list events');
+    db.query("select ID, EVENT_TITLE, START_DATE, END_DATE, CATEGORY, DESCRIPTION, FEATURED_FLAG, CREATED_AT, UPDATED_AT FROM EVENTS;")
+      .then(function (data) {
+          return res.json(data);
+      })
+      .catch(function (error) {
+          // error;
+          console.log(error.message + error.stack);
+      });
 
 }
 
