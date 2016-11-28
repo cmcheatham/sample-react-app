@@ -19,8 +19,8 @@
         getInitialState: function() {
             return {eventlist:this.props.events};
         },
-        handleNewRowSubmit: function( newcompany ) {
-            this.setState( {eventlist: this.state.eventlist.concat([newcompany])} );
+        handleNewRowSubmit: function( newevent ) {
+            this.setState( {eventlist: this.state.eventlist.concat([newevent])} );
         },
         handleCompanyRemove: function( company ) {
 
