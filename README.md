@@ -4,6 +4,5 @@ Nodejs/Express/Angular App
 #Hosted on Heroku
 https://agile-sierra-79694.herokuapp.com/
 
-#Styleguide
-https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
-
+#As a react beginner I used this react code to start with:
+https://github.com/eajitesh/Hello-ReactJS/blob/master/add-remove-table-row.html
