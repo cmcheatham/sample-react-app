@@ -22,12 +22,12 @@
         handleNewRowSubmit: function( newevent ) {
             this.setState( {eventlist: this.state.eventlist.concat([newevent])} );
         },
-        handleCompanyRemove: function( company ) {
+        handleCompanyRemove: function( event ) {
 
             var index = -1;
             var clength = this.state.eventlist.length;
             for( var i = 0; i < clength; i++ ) {
-                if( this.state.eventlist[i].cname === company.cname ) {
+                if( this.state.eventlist[i].cname === event.cname ) {
                     index = i;
                     break;
                 }
@@ -55,14 +55,14 @@
     });
 
     var CompanyList = React.createClass({
-        handleCompanyRemove: function(company){
-            this.props.onCompanyRemove( company );
+        handleCompanyRemove: function(event){
+            this.props.onCompanyRemove( event );
         },
         render: function() {
             var events = [];
             var that = this; // TODO: Needs to find out why that = this made it work; Was getting error that onCompanyDelete is not undefined
-            this.props.clist.forEach(function(company) {
-                events.push(<Company company={company} onCompanyDelete={that.handleCompanyRemove} /> );
+            this.props.clist.forEach(function(event) {
+                events.push(<Company event={event} onCompanyDelete={that.handleCompanyRemove} /> );
             });
             return (
                     <div>
@@ -90,21 +90,21 @@
 
     var Company = React.createClass({
         handleRemoveCompany: function() {
-            this.props.onCompanyDelete( this.props.company );
+            this.props.onCompanyDelete( this.props.event );
             return false;
         },
         render: function() {
             return (
                     <tr>
-                        <td>{this.props.company.id}</td>
-                        <td>{this.props.company.event_title}</td>
-                        <td>{this.props.company.start_date}</td>
-                        <td>{this.props.company.end_date}</td>
-                        <td>{this.props.company.category}</td>
-                        <td>{this.props.company.description}</td>
-                        <td>{this.props.company.featured}</td>
-                        <td>{this.props.company.created_at}</td>
-                        <td>{this.props.company.updated_at}</td>
+                        <td>{this.props.event.id}</td>
+                        <td>{this.props.event.event_title}</td>
+                        <td>{this.props.event.start_date}</td>
+                        <td>{this.props.event.end_date}</td>
+                        <td>{this.props.event.category}</td>
+                        <td>{this.props.event.description}</td>
+                        <td>{this.props.event.featured}</td>
+                        <td>{this.props.event.created_at}</td>
+                        <td>{this.props.event.updated_at}</td>
                         <td><input type="button"  className="btn btn-primary" value="Remove" onClick={this.handleRemoveCompany}/></td>
                         <td><input type="button"  className="btn btn-primary" value="Edit" onClick={this.handleRemoveCompany}/></td>
                     </tr>
