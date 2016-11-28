@@ -17,7 +17,7 @@
     /** @jsx React.DOM */
     var EventCMSApp = React.createClass({
         getInitialState: function() {
-            return {companylist:this.props.companies};
+            return {companylist:this.props.events};
         },
         handleNewRowSubmit: function( newcompany ) {
             this.setState( {companylist: this.state.companylist.concat([newcompany])} );
@@ -59,10 +59,10 @@
             this.props.onCompanyRemove( company );
         },
         render: function() {
-            var companies = [];
+            var events = [];
             var that = this; // TODO: Needs to find out why that = this made it work; Was getting error that onCompanyDelete is not undefined
             this.props.clist.forEach(function(company) {
-                companies.push(<Company company={company} onCompanyDelete={that.handleCompanyRemove} /> );
+                events.push(<Company company={company} onCompanyDelete={that.handleCompanyRemove} /> );
             });
             return (
                     <div>
@@ -81,7 +81,7 @@
                                     <th>Updated At</th>
                                 </tr>
                             </thead>
-                            <tbody>{companies}</tbody>
+                            <tbody>{events}</tbody>
                         </table>
                     </div>
             );
@@ -176,11 +176,11 @@
             );
         }
     });
-    var defCompanies = [
+    var defEvents = [
         {id:1,event_title:'Annual Winter Festival',start_date:"12-18-2016", end_date: "12-20-2016", category: "Public Event", description: "The cities annual winter festival", featured: true, created_at: '11-15-2016 00:00:00', updated_at: '11-15-2016 00:00:00'},
         {id:2,event_title:'Wild Cats Football',start_date:"12-10-2016", end_date: "12-10-2016", category: "Sports Event", description: "Wild Cats vs Panthers", featured: true, created_at: '11-15-2016 00:00:00', updated_at: '11-15-2016 00:00:00'}
     ];
-    React.renderComponent( <EventCMSApp companies={defCompanies}/>, document.getElementById( "eventCMSApp" ) );
+    React.renderComponent( <EventCMSApp events={defEvents}/>, document.getElementById( "eventCMSApp" ) );
 </script>
 </body>
 </html>
