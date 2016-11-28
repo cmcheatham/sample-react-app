@@ -22,7 +22,7 @@
         handleNewRowSubmit: function( newevent ) {
             this.setState( {eventlist: this.state.eventlist.concat([newevent])} );
         },
-        handleCompanyRemove: function( event ) {
+        handleEventRemove: function( event ) {
 
             var index = -1;
             var clength = this.state.eventlist.length;
@@ -43,7 +43,7 @@
                     <table style={tableStyle}>
                         <tr>
                             <td style={leftTdStyle}>
-                                <CompanyList clist={this.state.eventlist}  onCompanyRemove={this.handleCompanyRemove}/>
+                                <CompanyList clist={this.state.eventlist}  onEventRemove={this.handleEventRemove}/>
                             </td>
                             <td style={rightTdStyle}>
                                 <NewRow onRowSubmit={this.handleNewRowSubmit}/>
@@ -55,14 +55,14 @@
     });
 
     var CompanyList = React.createClass({
-        handleCompanyRemove: function(event){
-            this.props.onCompanyRemove( event );
+        handleEventRemove: function(event){
+            this.props.onEventRemove( event );
         },
         render: function() {
             var events = [];
-            var that = this; // TODO: Needs to find out why that = this made it work; Was getting error that onCompanyDelete is not undefined
+            var that = this; // TODO: Needs to find out why that = this made it work; Was getting error that onEventDelete is not undefined
             this.props.clist.forEach(function(event) {
-                events.push(<Company event={event} onCompanyDelete={that.handleCompanyRemove} /> );
+                events.push(<Event event={event} onEventDelete={that.handleEventRemove} /> );
             });
             return (
                     <div>
@@ -88,9 +88,9 @@
         }
     });
 
-    var Company = React.createClass({
+    var Event = React.createClass({
         handleRemoveCompany: function() {
-            this.props.onCompanyDelete( this.props.event );
+            this.props.onEventDelete( this.props.event );
             return false;
         },
         render: function() {
