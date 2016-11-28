@@ -35,6 +35,9 @@
             this.state.eventlist.splice( index, 1 );
             this.setState( {eventlist: this.state.eventlist} );
         },
+        handleEventEdit: function( event ) {
+            console.log( event );
+        },
         render: function() {
             var tableStyle = {width: '100%'};
             var leftTdStyle = {width: '50%',padding:'20px',verticalAlign: 'top'};
@@ -43,7 +46,7 @@
                     <table style={tableStyle}>
                         <tr>
                             <td style={leftTdStyle}>
-                                <CompanyList clist={this.state.eventlist}  onEventRemove={this.handleEventRemove}/>
+                                <EventList clist={this.state.eventlist}  onEventRemove={this.handleEventRemove} onEventUpdate={this.handleEventEdit}/>
                             </td>
                             <td style={rightTdStyle}>
                                 <NewRow onRowSubmit={this.handleNewRowSubmit}/>
@@ -54,15 +57,18 @@
         }
     });
 
-    var CompanyList = React.createClass({
+    var EventList = React.createClass({
         handleEventRemove: function(event){
             this.props.onEventRemove( event );
+        },
+        handleEventEdit: function (event){
+            this.props.onEventUpdate( event );
         },
         render: function() {
             var events = [];
             var that = this; // TODO: Needs to find out why that = this made it work; Was getting error that onEventDelete is not undefined
             this.props.clist.forEach(function(event) {
-                events.push(<Event event={event} onEventDelete={that.handleEventRemove} /> );
+                events.push(<Event event={event} onEventDelete={that.handleEventRemove} onEventEdit={that.handleEventEdit}/> );
             });
             return (
                     <div>
@@ -89,8 +95,12 @@
     });
 
     var Event = React.createClass({
-        handleRemoveCompany: function() {
+        handleRemoveEvent: function() {
             this.props.onEventDelete( this.props.event );
+            return false;
+        },
+        handleEditEvent: function() {
+            this.props.onEventEdit( this.props.event );
             return false;
         },
         render: function() {
@@ -105,8 +115,8 @@
                         <td>{this.props.event.featured}</td>
                         <td>{this.props.event.created_at}</td>
                         <td>{this.props.event.updated_at}</td>
-                        <td><input type="button"  className="btn btn-primary" value="Remove" onClick={this.handleRemoveCompany}/></td>
-                        <td><input type="button"  className="btn btn-primary" value="Edit" onClick={this.handleRemoveCompany}/></td>
+                        <td><input type="button"  className="btn btn-primary" value="Remove" onClick={this.handleRemoveEvent}/></td>
+                        <td><input type="button"  className="btn btn-primary" value="Edit" onClick={this.handleEditEvent}/></td>
                     </tr>
             );
         }
