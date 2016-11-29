@@ -1,6 +1,6 @@
 # Sample React App
 ##by Caleb Cheatham
-Postgres/Nodejs/Express
+Postgres/Nodejs/Express/React
 
 ###Hosted on Heroku
 https://agile-sierra-79694.herokuapp.com/
