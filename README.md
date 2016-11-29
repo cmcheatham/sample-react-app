@@ -1,10 +1,11 @@
-# sample-react-app
+# Sample React App
+####by Caleb Cheatham
 Postgres/Nodejs/Express
 
-#Hosted on Heroku
+###Hosted on Heroku
 https://agile-sierra-79694.herokuapp.com/
 
-#As a react beginner I used this react code to start with:
+As a react beginner I used this react code to start with:
 https://github.com/eajitesh/Hello-ReactJS/blob/master/add-remove-table-row.html
 
 Steps I have taken to set up app:
