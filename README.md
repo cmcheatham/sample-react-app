@@ -22,9 +22,9 @@ Steps I have taken to set up app:
     - Create Index JS, add react library
     
 Technology
-* [PostgreSQL] - HTML enhanced for web apps!
+* [PostgreSQL] - Sophisticated open-source Object-Relational DBMS
 * [ReactJS] - HTML enhanced for web apps!
-* [Express] - fast node.js network app framework [@tjholowaychuk]
+* [Express] - fast node.js network app framework
 * [node.js] - evented I/O for the backend
 * [Heroku] - Deploy amazing webapps
 

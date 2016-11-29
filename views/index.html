@@ -1,10 +1,15 @@
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Event CMS Tutorial">
+    <!--<meta name="keywords" content="HTML,CSS,React,JavaScript">-->
+    <meta name="author" content="Caleb Cheatham">
     <title>ReactJS - Event CMS</title>
     <link rel="stylesheet" href="/custom-styles.css">
     <script src="/node_modules/react/dist/react.min.js"></script>
     <script src="/node_modules/react/dist/JSXTransformer.js"></script>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="shortcut icon" href="">
 </head>
 <body>
 <div class="custom-container">
@@ -107,7 +112,7 @@
                                    onEventEdit={that.handleEventEdit}/>);
             });
             return (
-                    <div class="row">
+                    <div>
                         <h3>Events:</h3>
                         <table className="table table-striped">
                             <thead>
@@ -199,7 +204,7 @@
         render: function () {
             var inputStyle = {padding: '12px'}
             return (
-                    <div className="well" id="well">
+                    <div>
                         <h3>Add Event</h3>
                         <form onSubmit={this.handleSubmit}>
                             <div className="input-group input-group-lg" style={inputStyle}>
