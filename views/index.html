@@ -3,7 +3,6 @@
     <title>ReactJS - Event CMS</title>
     <link rel="stylesheet" href="/custom-styles.css">
     <script src="/node_modules/react/dist/react.min.js"></script>
-    <script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
     <script src="/node_modules/react/dist/JSXTransformer.js"></script>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 </head>
@@ -72,13 +71,6 @@
         handleEventEdit: function (event) {
             console.log(event);
             // temporary render target
-            var temp = document.createElement("div");
-            // render
-            ReactDOM.render(<p>test</p>, temp);
-            // grab the container
-            var container = document.getElementById("custom-container");
-            // and replace the child
-            container.replaceChild(temp.querySelector("#well"), document.getElementById("well"));
         },
         render: function () {
             var tableStyle = {width: '100%'};
