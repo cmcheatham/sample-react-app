@@ -1,5 +1,5 @@
 # Sample React App
-####by Caleb Cheatham
+##by Caleb Cheatham
 Postgres/Nodejs/Express
 
 ###Hosted on Heroku
