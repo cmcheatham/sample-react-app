@@ -7,6 +7,7 @@ var router = express.Router();
 //Exposing Node Modules directory to node
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
+
 //Exposing nested views to node
 app.use(express.static(__dirname + '/views'));
 

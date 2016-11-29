@@ -2,12 +2,13 @@
 <head>
     <title>ReactJS - Event CMS</title>
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/custom-styles.css">
     <script src="/node_modules/react/dist/react.min.js"></script>
     <script src="/node_modules/react/dist/JSXTransformer.js"></script>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="custom-container">
     <div class="page-header">
         <h1>ReactJS - Event CMS</h1>
     </div>
@@ -16,45 +17,78 @@
 <script type="text/jsx">
     /** @jsx React.DOM */
     var EventCMSApp = React.createClass({
-        getInitialState: function() {
-            return {eventlist:this.props.events};
+        getInitialState: function () {
+            return {eventlist: this.props.events};
         },
-        handleNewRowSubmit: function( newevent ) {
-            this.setState( {eventlist: this.state.eventlist.concat([newevent])} );
-        },
-        handleEventRemove: function( event ) {
-            console.log(event);
-            return fetch('/eventlist/'+event.id, {method: 'DELETE',
-                    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}})
+        handleNewRowSubmit: function (newevent) {
+            console.log(newevent);
+            this.setState({eventlist: this.state.eventlist.concat([newevent])});
+            return fetch('/eventlist/', {
+                method: 'POST',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    id: newevent.id,
+                    event_title: newevent.event_title,
+                    start_date: newevent.start_date,
+                    end_date: newevent.end_date,
+                    category: newevent.category,
+                    description: newevent.description,
+                    featured: newevent.featured
+                })
+            })
                     .then((response) => response.json())
                     .then((responseJson) => {
                         var index = -1;
                         var clength = this.state.eventlist.length;
-                        for( var i = 0; i < clength; i++ ) {
-                            if( this.state.eventlist[i].event_title === event.event_title ) {
+                        for (var i = 0; i < clength; i++) {
+                            if (this.state.eventlist[i].event_title === event.event_title) {
                                 index = i;
                                 break;
                             }
                         }
-                        this.state.eventlist.splice( index, 1 );
-                        this.setState( {eventlist: this.state.eventlist} );
+                        this.state.eventlist.splice(index, 1);
+                        this.setState({eventlist: this.state.eventlist});
                     })
                     .catch((error) => {
                         console.error(error);
                     });
         },
-        handleEventEdit: function( event ) {
-            console.log( event );
+        handleEventRemove: function (event) {
+            console.log(event);
+            return fetch('/eventlist/' + event.id, {
+                method: 'DELETE',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            })
+                    .then((response) => response.json())
+                    .then((responseJson) => {
+                        var index = -1;
+                        var clength = this.state.eventlist.length;
+                        for (var i = 0; i < clength; i++) {
+                            if (this.state.eventlist[i].event_title === event.event_title) {
+                                index = i;
+                                break;
+                            }
+                        }
+                        this.state.eventlist.splice(index, 1);
+                        this.setState({eventlist: this.state.eventlist});
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
         },
-        render: function() {
+        handleEventEdit: function (event) {
+            console.log(event);
+        },
+        render: function () {
             var tableStyle = {width: '100%'};
-            var leftTdStyle = {width: '50%',padding:'20px',verticalAlign: 'top'};
-            var rightTdStyle = {width: '50%',padding:'20px',verticalAlign: 'top'};
+            var leftTdStyle = {width: '30%', padding: '20px', verticalAlign: 'top'};
+            var rightTdStyle = {width: '80%', padding: '20px', verticalAlign: 'top'};
             return (
                     <table style={tableStyle}>
                         <tr>
                             <td style={leftTdStyle}>
-                                <EventList clist={this.state.eventlist}  onEventRemove={this.handleEventRemove} onEventUpdate={this.handleEventEdit}/>
+                                <EventList clist={this.state.eventlist} onEventRemove={this.handleEventRemove}
+                                           onEventUpdate={this.handleEventEdit}/>
                             </td>
                             <td style={rightTdStyle}>
                                 <NewRow onRowSubmit={this.handleNewRowSubmit}/>
@@ -66,21 +100,22 @@
     });
 
     var EventList = React.createClass({
-        handleEventRemove: function(event){
-            this.props.onEventRemove( event );
+        handleEventRemove: function (event) {
+            this.props.onEventRemove(event);
         },
-        handleEventEdit: function (event){
-            this.props.onEventUpdate( event );
+        handleEventEdit: function (event) {
+            this.props.onEventUpdate(event);
         },
-        render: function() {
+        render: function () {
             var events = [];
             var that = this; // TODO: Needs to find out why that = this made it work; Was getting error that onEventDelete is not undefined
-            this.props.clist.forEach(function(event) {
-                events.push(<Event event={event} onEventDelete={that.handleEventRemove} onEventEdit={that.handleEventEdit}/> );
+            this.props.clist.forEach(function (event) {
+                events.push(<Event event={event} onEventDelete={that.handleEventRemove}
+                                   onEventEdit={that.handleEventEdit}/>);
             });
             return (
-                    <div>
-                        <h3>Events: </h3>
+                    <div class="row">
+                        <h3>Events:</h3>
                         <table className="table table-striped">
                             <thead>
                                 <tr>
@@ -103,15 +138,15 @@
     });
 
     var Event = React.createClass({
-        handleRemoveEvent: function() {
-            this.props.onEventDelete( this.props.event );
+        handleRemoveEvent: function () {
+            this.props.onEventDelete(this.props.event);
             return false;
         },
-        handleEditEvent: function() {
-            this.props.onEventEdit( this.props.event );
+        handleEditEvent: function () {
+            this.props.onEventEdit(this.props.event);
             return false;
         },
-        render: function() {
+        render: function () {
             return (
                     <tr>
                         <td>{this.props.event.id}</td>
@@ -123,24 +158,30 @@
                         <td>{this.props.event.featured}</td>
                         <td>{this.props.event.created_at}</td>
                         <td>{this.props.event.updated_at}</td>
-                        <td><input type="button"  className="btn btn-primary" value="Remove" onClick={this.handleRemoveEvent}/></td>
-                        <td><input type="button"  className="btn btn-primary" value="Edit" onClick={this.handleEditEvent}/></td>
+                        <td>
+                            <input type="button" className="btn btn-primary" value="Remove"
+                                   onClick={this.handleRemoveEvent}/>
+                        </td>
+                        <td>
+                            <input type="button" className="btn btn-primary" value="Edit"
+                                   onClick={this.handleEditEvent}/>
+                        </td>
                     </tr>
             );
         }
     });
 
     var NewRow = React.createClass({
-        handleSubmit: function() {
-            var id = 4;
+        handleSubmit: function () {
+            var id = '';
             var event_title = this.refs.event_title.getDOMNode().value;
             var start_date = this.refs.start_date.getDOMNode().value;
             var end_date = this.refs.end_date.getDOMNode().value;
             var category = this.refs.category.getDOMNode().value;
             var description = this.refs.description.getDOMNode().value;
             var featured = this.refs.featured.getDOMNode().value;
-            var created_at = '12-01-2016 00:00:00';
-            var updated_at = '12-01-2016 00:00:00';
+            var created_at = '';
+            var updated_at = '';
             var newrow = {
                 id: id,
                 event_title: event_title,
@@ -152,7 +193,7 @@
                 created_at: created_at,
                 updated_at: updated_at
             };
-            this.props.onRowSubmit( newrow );
+            this.props.onRowSubmit(newrow);
 
             this.refs.event_title.getDOMNode().value = '';
             this.refs.start_date.getDOMNode().value = '';
@@ -162,32 +203,38 @@
             this.refs.featured.getDOMNode().value = false;
             return false;
         },
-        render: function() {
-            var inputStyle = {padding:'12px'}
+        render: function () {
+            var inputStyle = {padding: '12px'}
             return (
-                    <div className="well" id="event-">
+                    <div className="well">
                         <h3>Add Event</h3>
                         <form onSubmit={this.handleSubmit}>
                             <div className="input-group input-group-lg" style={inputStyle}>
-                                <input type="text"  className="form-control col-md-8"  placeholder="Event Title" ref="event_title"/>
+                                <input type="text" className="form-control col-md-8" placeholder="Event Title"
+                                       ref="event_title"/>
                             </div>
                             <div className="input-group input-group-lg" style={inputStyle}>
-                                <input type="text"  className="form-control col-md-8" placeholder="Start Date" ref="start_date"/>
+                                <input type="text" className="form-control col-md-8" placeholder="Start Date"
+                                       ref="start_date"/>
                             </div>
                             <div className="input-group input-group-lg" style={inputStyle}>
-                                <input type="text"  className="form-control col-md-8" placeholder="End Date" ref="end_date"/>
+                                <input type="text" className="form-control col-md-8" placeholder="End Date"
+                                       ref="end_date"/>
                             </div>
                             <div className="input-group input-group-lg" style={inputStyle}>
-                                <input type="text"  className="form-control col-md-8" placeholder="Category" ref="category"/>
+                                <input type="text" className="form-control col-md-8" placeholder="Category"
+                                       ref="category"/>
                             </div>
                             <div className="input-group input-group-lg" style={inputStyle}>
-                                <input type="text"  className="form-control col-md-8" placeholder="Description" ref="description"/>
+                                <input type="text" className="form-control col-md-8" placeholder="Description"
+                                       ref="description"/>
                             </div>
                             <div className="input-group input-group-lg" style={inputStyle}>
-                                <input type="text"  className="form-control col-md-8" placeholder="Featured" ref="featured"/>
+                                <input type="text" className="form-control col-md-8" placeholder="Featured"
+                                       ref="featured"/>
                             </div>
                             <div className="input-group input-group-lg" style={inputStyle}>
-                                <input type="submit"  className="btn btn-primary" value="Add Event"/>
+                                <input type="submit" className="btn btn-primary" value="Add Event"/>
                             </div>
                         </form>
                     </div>
@@ -200,7 +247,7 @@
                 .then((responseJson) => {
                     console.log(responseJson)
                     var defEvents = responseJson;
-                    React.renderComponent( <EventCMSApp events={defEvents}/>, document.getElementById( "eventCMSApp" ) );
+                    React.renderComponent(<EventCMSApp events={defEvents}/>, document.getElementById("eventCMSApp"));
                     return responseJson.movies;
                 })
                 .catch((error) => {
