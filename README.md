@@ -1,5 +1,5 @@
-# sample-angular-app
-Nodejs/Express/Angular App
+# sample-react-app
+Postgres/Nodejs/Express
 
 #Hosted on Heroku
 https://agile-sierra-79694.herokuapp.com/
@@ -21,10 +21,14 @@ Steps I have taken to set up app:
     - Create Index JS, add react library
     
 Technology
+* [PostgreSQL] - HTML enhanced for web apps!
 * [ReactJS] - HTML enhanced for web apps!
 * [Express] - fast node.js network app framework [@tjholowaychuk]
 * [node.js] - evented I/O for the backend
+* [Heroku] - Deploy amazing webapps
 
+   [PostgreSQL]: <https://www.postgresql.org/>
    [ReactJS]: <https://facebook.github.io/react/>
    [express]: <http://expressjs.com>
    [node.js]: <http://nodejs.org>
+   [heroku]: <http://heroku.com>
