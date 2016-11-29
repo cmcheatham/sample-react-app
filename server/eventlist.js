@@ -36,7 +36,14 @@ exports.listEvents = function (req, res) {
 
 //DELETE EVENTS
 exports.deleteEvents = function (req, res) {
-
-    console.log('delete event');
+  console.log('delete event');
+  db.query("DELETE FROM EVENTS WHERE ID=$1;", [req.params.id])
+    .then(function (data) {
+      return res.json({data: data});
+    })
+    .catch(function (error) {
+      // error;
+      console.log(error.message + error.stack);
+    });
 
 }

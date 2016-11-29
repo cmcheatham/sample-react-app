@@ -23,17 +23,25 @@
             this.setState( {eventlist: this.state.eventlist.concat([newevent])} );
         },
         handleEventRemove: function( event ) {
-
-            var index = -1;
-            var clength = this.state.eventlist.length;
-            for( var i = 0; i < clength; i++ ) {
-                if( this.state.eventlist[i].event_title === event.event_title ) {
-                    index = i;
-                    break;
-                }
-            }
-            this.state.eventlist.splice( index, 1 );
-            this.setState( {eventlist: this.state.eventlist} );
+            console.log(event);
+            return fetch('/eventlist/'+event.id, {method: 'DELETE',
+                    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}})
+                    .then((response) => response.json())
+                    .then((responseJson) => {
+                        var index = -1;
+                        var clength = this.state.eventlist.length;
+                        for( var i = 0; i < clength; i++ ) {
+                            if( this.state.eventlist[i].event_title === event.event_title ) {
+                                index = i;
+                                break;
+                            }
+                        }
+                        this.state.eventlist.splice( index, 1 );
+                        this.setState( {eventlist: this.state.eventlist} );
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
         },
         handleEventEdit: function( event ) {
             console.log( event );
