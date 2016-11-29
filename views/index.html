@@ -20,8 +20,6 @@
             return {eventlist: this.props.events};
         },
         handleNewRowSubmit: function (newevent) {
-            console.log(newevent);
-            this.setState({eventlist: this.state.eventlist.concat([newevent])});
             return fetch('/eventlist/', {
                 method: 'POST',
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
@@ -32,21 +30,16 @@
                     end_date: newevent.end_date,
                     category: newevent.category,
                     description: newevent.description,
-                    featured: newevent.featured
+                    featured: true
                 })
             })
                     .then((response) => response.json())
                     .then((responseJson) => {
-                        var index = -1;
-                        var clength = this.state.eventlist.length;
-                        for (var i = 0; i < clength; i++) {
-                            if (this.state.eventlist[i].event_title === event.event_title) {
-                                index = i;
-                                break;
-                            }
-                        }
-                        this.state.eventlist.splice(index, 1);
-                        this.setState({eventlist: this.state.eventlist});
+                        console.log(responseJson);
+                        console.log(newevent)
+                        newevent.id = responseJson.data[0].id;
+                        newevent.created_at = responseJson.data[0].created_at;
+                        this.setState({eventlist: this.state.eventlist.concat([newevent])});
                     })
                     .catch((error) => {
                         console.error(error);
@@ -244,10 +237,8 @@
         return fetch('/eventlist')
                 .then((response) => response.json())
                 .then((responseJson) => {
-                    console.log(responseJson)
                     var defEvents = responseJson;
                     React.renderComponent(<EventCMSApp events={defEvents}/>, document.getElementById("eventCMSApp"));
-                    return responseJson.movies;
                 })
                 .catch((error) => {
                     console.error(error);

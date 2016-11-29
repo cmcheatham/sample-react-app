@@ -9,7 +9,7 @@ var exports = module.exports;
 //CREATE EVENT
 exports.createEvent = function (req, res) {
   console.log('create event');
-  db.query("INSERT INTO EVENTS VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5, $6, now());", [req.body.event_title, req.body.start_date, req.body.end_date, req.body.category, req.body.description, req.body.featured])
+  db.query("INSERT INTO EVENTS VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5, $6, now()) RETURNING ID, CREATED_AT", [req.body.event_title, req.body.start_date, req.body.end_date, req.body.category, req.body.description, req.body.featured])
     .then(function (data) {
       return res.json({data: data});
     })
