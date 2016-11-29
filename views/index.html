@@ -186,11 +186,21 @@
             );
         }
     });
-    var defEvents = [
-        {id:1,event_title:'Annual Winter Festival',start_date:"12-18-2016", end_date: "12-20-2016", category: "Public Event", description: "The cities annual winter festival", featured: true, created_at: '11-15-2016 00:00:00', updated_at: '11-15-2016 00:00:00'},
-        {id:2,event_title:'Wild Cats Football',start_date:"12-10-2016", end_date: "12-10-2016", category: "Sports Event", description: "Wild Cats vs Panthers", featured: true, created_at: '11-15-2016 00:00:00', updated_at: '11-15-2016 00:00:00'}
-    ];
-    React.renderComponent( <EventCMSApp events={defEvents}/>, document.getElementById( "eventCMSApp" ) );
+    function getMoviesFromApiAsync() {
+        return fetch('/eventlist')
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    console.log(responseJson)
+                    var defEvents = responseJson;
+                    React.renderComponent( <EventCMSApp events={defEvents}/>, document.getElementById( "eventCMSApp" ) );
+                    return responseJson.movies;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+    }
+    getMoviesFromApiAsync();
+
 </script>
 </body>
 </html>
