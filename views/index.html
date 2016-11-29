@@ -3,13 +3,14 @@
     <title>ReactJS - Event CMS</title>
     <link rel="stylesheet" href="/custom-styles.css">
     <script src="/node_modules/react/dist/react.min.js"></script>
+    <script src="/node_modules/react-dom/dist/react-dom.min.js"></script>
     <script src="/node_modules/react/dist/JSXTransformer.js"></script>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
 <div class="custom-container">
     <div class="page-header">
-        <h1>ReactJS - Event CMS</h1>
+        <h1 class="title">ReactJS - Event CMS</h1>
     </div>
     <div id="eventCMSApp"></div>
 </div>
@@ -70,6 +71,14 @@
         },
         handleEventEdit: function (event) {
             console.log(event);
+            // temporary render target
+            var temp = document.createElement("div");
+            // render
+            ReactDOM.render(<p>test</p>, temp);
+            // grab the container
+            var container = document.getElementById("custom-container");
+            // and replace the child
+            container.replaceChild(temp.querySelector("#well"), document.getElementById("well"));
         },
         render: function () {
             var tableStyle = {width: '100%'};
@@ -198,7 +207,7 @@
         render: function () {
             var inputStyle = {padding: '12px'}
             return (
-                    <div className="well">
+                    <div className="well" id="well">
                         <h3>Add Event</h3>
                         <form onSubmit={this.handleSubmit}>
                             <div className="input-group input-group-lg" style={inputStyle}>
