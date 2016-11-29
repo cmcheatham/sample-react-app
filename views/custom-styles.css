@@ -21,6 +21,23 @@ th {
     color: white;
 }
 
+.event-input{
+    padding: 0;
+    width: 200px;
+    height: 25px;
+}
+
 .title{
     padding: 20px;
+}
+
+.btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 2px 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
 }
